@@ -11,7 +11,6 @@ public class MyVector {
     }
 
     public void newCapacityOfVector(int capacity) {
-        System.out.println("newcapacityOfVector capacity: " + capacity);
         if (capacity == this.capacity) return;
         this.capacity = capacity;
         int[] tmpArray = new int[capacity];

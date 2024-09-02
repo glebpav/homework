@@ -1,7 +1,6 @@
 public class Main {
    static MyVector myVector;
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         myVector = new MyVector();
         myVector.vector[0] = 20;
         myVector.vector[1] = 11;
