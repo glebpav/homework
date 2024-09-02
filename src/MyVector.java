@@ -1,7 +1,7 @@
 public class MyVector {
-    public java.lang.System System;
+
     private int size;
-    private Integer capacity;
+    private int capacity;
     public int[] vector;
 
 
@@ -11,63 +11,65 @@ public class MyVector {
     }
 
     public void newCapacityOfVector(int capacity) {
+        System.out.println("newcapacityOfVector capacity: " + capacity);
+        if (capacity == this.capacity) return;
         this.capacity = capacity;
-        vector = new int[capacity];
+        int[] tmpArray = new int[capacity];
+        if (vector != null) {
+            for (int i = 0; i < vector.length; i++) {
+                tmpArray[i] = vector[i];
+            }
+        }
+            // System.arraycopy(vector, 0, tmpArray, 0, size);
+        vector = tmpArray;
     }
 
-    public void add(int Idx, int val) {
-        if (Idx == returnSize()) {
-            addLast(val);
+    public void add(int idx, int val) {
+        if (idx > size) return;
+
+        int localCapacity = capacity;
+        while (size >= localCapacity)
+            localCapacity *= 2;
+
+        newCapacityOfVector(capacity * 2);
+
+        for (int i = size; i > idx; i--) {
+            vector[i] = vector[i - 1];
         }
-        if (Idx >= returnSize()) {
-            newCapacityOfVector(Idx - returnSize());
-            addLast(val);
-        }
-        for (int i = Idx + 1; i < returnSize() - 1; i++) {
-            cheakCapacity();
-            vector[i] = vector[i + 1];
-        }
-        vector[Idx] = val;
+        vector[idx] = val;
+        size += 1;
 
     }
 
     public void addLast(int a) {
-        vector[vector.length] = a;
+        add(size, a);
     }
 
     public boolean deleteValue(int val) {
-        if(deleteIndex(findObject(val))) return true;
-        return false;
+        return deleteIndex(findObject(val));
     }
 
     public int findObject(int val) {
-        for (int i = 0; i < vector.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (vector[i] == val) {
                 return i;
             }
-            if (i < vector.length){
-                return 0;
-            }
         }
-      return 0;
+        return -1;
     }
 
-    public boolean deleteIndex(int Idx) {
-
-        vector[Idx] = vector[Idx + 1];
-        for (int i = returnSize() ; i > Idx + 1; i--) {
-
-            vector[i] = vector[i - 1];
-            return true;
+    public boolean deleteIndex(int idx) {
+        if (idx >= size || idx < 0) return false;
+        for (int i = idx + 1; i < size; i++) {
+            vector[i - 1] = vector[i];
         }
-
-        return false;
-
+        size -= 1;
+        return true;
     }
 
-    public void SoutTest() {
-        for (int i = 0; i < vector.length; i++) {
-            System.out.println(vector[i]);
+    public void soutTest() {
+        for (int j : vector) {
+            System.out.println(j);
         }
     }
 
@@ -76,40 +78,19 @@ public class MyVector {
     }
 
     public int returnSize() {
-        int i = 1;
-
-        int intermediateSize = 0;
-        while (true)
-            if (i < vector.length) {
-
-                if (vector[i] == 0) {
-                    ++i;
-                    continue;
-                } else {
-                    ++i;
-                    intermediateSize += 1;
-                }
-            } else {
-                return intermediateSize;
-
-            }
-
-
+        return size;
     }
 
-    public void set(int Idx, int val) {
-        vector[Idx] = val;
+    public void set(int idx, int val) {
+        if (idx >= size || idx < 0) return;
+        vector[idx] = val;
     }
-    public  int get (int Idx , int val){
-        return vector[Idx] = val;
+
+    public int get(int idx) {
+        if (idx >= size || idx < 0) return 0;
+        return vector[idx];
     }
-    public boolean cheakCapacity(){
-        if(capacity <= size){
-            newCapacityOfVector(capacity * 2);
-            return true;
-        }
-        return false;
-    }
+
 }
 
 

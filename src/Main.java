@@ -17,9 +17,7 @@ public class Main {
 
         myVector.add(8,5);
 
-
-
-        myVector.SoutTest();
+        myVector.soutTest();
 
     }
 }
