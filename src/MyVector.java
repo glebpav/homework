@@ -4,10 +4,9 @@ public class MyVector {
     private int capacity;
     public int[] vector;
 
-
     public MyVector() {
         newCapacityOfVector(10);
-        size = returnSize();
+        size = 0;
     }
 
     public void newCapacityOfVector(int capacity) {
@@ -15,11 +14,11 @@ public class MyVector {
         this.capacity = capacity;
         int[] tmpArray = new int[capacity];
         if (vector != null) {
-            for (int i = 0; i < vector.length; i++) {
+            /*for (int i = 0; i < vector.length; i++) {
                 tmpArray[i] = vector[i];
-            }
+            }*/
+            System.arraycopy(vector, 0, tmpArray, 0, size);
         }
-            // System.arraycopy(vector, 0, tmpArray, 0, size);
         vector = tmpArray;
     }
 
@@ -67,8 +66,12 @@ public class MyVector {
     }
 
     public void soutTest() {
-        for (int j : vector) {
+        /*for (int j : vector) {
             System.out.println(j);
+        }*/
+        System.out.print("array: ");
+        for (int i = 0; i < size; i++) {
+            System.out.println(vector[i] + " ");
         }
     }
 
@@ -76,7 +79,7 @@ public class MyVector {
         return vector.length;
     }
 
-    public int returnSize() {
+    public int getSize() {
         return size;
     }
 
