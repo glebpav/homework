@@ -1,3 +1,6 @@
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -15,6 +18,8 @@ public class Main {
             System.out.println("node value: " + node.getValue());
             node = node.getNext();
         }
+
+        OutputStream
 
     }
 }

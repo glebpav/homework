@@ -1,58 +1,71 @@
 public class MyList {
 
     Node head;
+    Node tail;
     int size;
 
     public MyList() {
         head = null;
+        tail = null;
         size = 0;
     }
 
     public void addLast(int value) {
-        Node node = head;
-        Node prev = null;
 
-        while (node != null) {
-            prev = node;
-            node = node.getNext();
-        }
-
-        if (prev != null) {
-            prev.setNext(new Node(value));
-        } else {
+        if (size == 0) {
             head = new Node(value);
+            tail = head;
+        } else {
+            Node newNode = new Node(value, null, tail);
+            tail.setNext(newNode);
+            tail = newNode;
         }
 
         size += 1;
     }
 
     public void deleteLast() {
+        if (size == 0) return;
+        tail = tail.getPrev();
+        tail.setNext(null);
+        size -= 1;
+    }
+
+    public void delete(Node node) {
 
         if (size == 0) return;
 
-        Node node = head;
-        Node prev = null;
+        Node prevNode = node.getPrev();
+        Node nextNode = node.getNext();
 
-        while (node != null && node.getNext() != null) {
-            prev = node;
-            node = node.getNext();
+        if (prevNode == null) {
+            head = nextNode;
+        }
+        if (nextNode == null) {
+            tail = prevNode;
         }
 
-        if (prev != null) {
-            prev.setNext(null);
-        } else {
-            head = null;
+        if (prevNode != null && nextNode != null) {
+            prevNode.setNext(nextNode);
+            nextNode.setPrev(prevNode);
         }
 
         size -= 1;
     }
 
-    public void add(int value, int idx) {
-        // Todo: write method;
+    public int getNodeByIdx(int idx) {
+        // todo: write
+        return 0;
     }
 
-    public void remove(int idx) {
-        // Todo: write method;
+    public Node deleteByIdx(int idx) {
+        // todo: write
+        return null;
     }
+
+    public void addByIdx(int idx, Node node) {
+        // todo: write
+    }
+
 
 }
